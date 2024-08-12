@@ -80,16 +80,11 @@ const App: React.FC = () => {
     let aa = account?.address || address;
     const { writeContract } = useWriteContract();
     let result_da_data = '0'
-    // 0xE963e90AAAAA907BF9D4C724C6520a832F6a4b0d
     const isCwl = ReadContract(aa, "genesisWhitelists");
     const isNwl = ReadContract(aa, "whitelists");
     const inviteCount = ReadContract(aa, "inviteCount");
     const result_da = ReadContract2(aa, "indices")
-
-    console.log(isCwl + '-------------!ref')
-    console.log(isNwl + '-------------!ref')
-    console.log(inviteCount + '-------------!ref')
-    console.log(result_da + '-------------!ref')
+ 
 
     if (result_da && result_da.data) {
       const data = result_da.data + ''
@@ -107,7 +102,7 @@ const App: React.FC = () => {
         setIsUserHidden(true)
         setTotal("10")
 
-        setLink("https://www.test.alpha.multiadaptive.com/?ref=" + account)
+        setLink("https://www.test.alpha.multiadaptive.com/?ref=" + aa)
         setInviteNum((10 - Number(inviteCount.data)).toString())
         setCount(inviteCount.data + '')
         setScore((Number(inviteCount.data) * 100).toString())
@@ -116,7 +111,7 @@ const App: React.FC = () => {
         setIsHidden(false)
         setIsUserHidden(true)
         setTotal("3")
-        setLink("https://www.test.alpha.multiadaptive.com/?ref=" + account)
+        setLink("https://www.test.alpha.multiadaptive.com/?ref=" + aa)
         setInviteNum((3 - Number(inviteCount.data)).toString())
         setCount(inviteCount.data + '')
         setScore((Number(inviteCount.data) * 100).toString())
@@ -176,6 +171,8 @@ const App: React.FC = () => {
     }
 
   };
+
+ 
   async function handleCopy(textToCopy: string) {
     try {
       await navigator.clipboard.writeText(textToCopy);
